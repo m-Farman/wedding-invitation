@@ -91,9 +91,99 @@ footer{text-align:center;padding:24px;background:#0b1325;color:#cbb98e;letter-sp
 @keyframes petalFall{0%{transform:translate3d(0,-10px,0) rotate(0);opacity:0}12%{opacity:.9}100%{transform:translate3d(35px,280px,0) rotate(280deg);opacity:0}}
 @media(max-width:650px){section{padding:62px 17px}.events{grid-template-columns:1fr}.calendar{padding:18px 9px}.days{gap:3px}.days div{padding:8px 0}.hero:before{inset:12px}.hero:after{inset:18px}.royal-scene{height:225px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}.entrance-person.groom{transform:translateX(22px)}.entrance-person.bride{transform:translateX(-22px)}}
+
+/* Cinematic royal invitation opening */
+.intro-screen{position:fixed;inset:0;z-index:30;display:grid;place-items:center;overflow:hidden;background:radial-gradient(ellipse at 50% 38%,#33415f 0%,#192642 48%,#091225 100%);transition:opacity 1.1s ease,visibility 1.1s ease}
+.intro-screen:before,.intro-screen:after{content:"";position:absolute;inset:17px;border:1px solid #d8b66d;pointer-events:none}
+.intro-screen:after{inset:24px;border-color:#d8b66d55}
+.intro-screen.dismissed{opacity:0;visibility:hidden;pointer-events:none}
+.intro-stars{position:absolute;inset:0;background-image:radial-gradient(#f3dba4 1px,transparent 1.7px),radial-gradient(#fff 1px,transparent 1.6px);background-size:91px 91px,143px 143px;background-position:0 0,35px 49px;opacity:.35;animation:introTwinkle 4.5s ease-in-out infinite alternate}
+@keyframes introTwinkle{to{opacity:.7;transform:scale(1.025)}}
+.intro-frame{position:relative;z-index:1;width:min(560px,90vw);text-align:center;padding:26px 12px;animation:introRise 1.3s both}
+@keyframes introRise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.intro-bismillah{font-size:30px;color:#f1dca9;margin-bottom:16px;text-shadow:0 0 22px #d8b66d55}
+.intro-kicker{font:11px 'Playfair Display',serif;letter-spacing:.28em;text-transform:uppercase;color:#d8b66d}
+.envelope-wrap{height:218px;width:min(360px,82vw);margin:26px auto 14px;position:relative;perspective:900px;filter:drop-shadow(0 22px 24px #0008)}
+.envelope{position:absolute;left:0;right:0;bottom:18px;height:176px;transform-style:preserve-3d}
+.envelope-shadow{position:absolute;left:8%;right:8%;bottom:7px;height:22px;border-radius:50%;background:#0008;filter:blur(13px)}
+.envelope-back{position:absolute;inset:0;background:linear-gradient(145deg,#263958,#111d36);border:1px solid #cba85e;border-radius:5px}
+.envelope-letter{position:absolute;z-index:1;left:8%;right:8%;top:9px;height:154px;background:linear-gradient(145deg,#fff8e9,#ead9b5);color:#75532b;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:1px solid #d3b46f;box-shadow:0 0 15px #0002;transition:transform 1.2s cubic-bezier(.2,.75,.2,1),top 1.2s}
+.letter-flourish{font-size:21px;color:#b18a43}
+.letter-names{font:39px 'Great Vibes',cursive;color:#8c6732}
+.letter-names i{font:18px 'Playfair Display',serif}
+.letter-date{font:9px 'Playfair Display',serif;letter-spacing:.22em}
+.envelope-front{position:absolute;z-index:3;inset:0;background:linear-gradient(145deg,#263b5c,#15223e);clip-path:polygon(0 0,50% 57%,100% 0,100% 100%,0 100%);border-bottom:1px solid #d8b66d}
+.envelope-flap{position:absolute;z-index:4;top:0;left:0;right:0;height:100%;background:linear-gradient(145deg,#3a4c6c,#1a2945);clip-path:polygon(0 0,100% 0,50% 58%);transform-origin:top center;transition:transform 1s cubic-bezier(.2,.7,.15,1),z-index 0s .5s;backface-visibility:hidden}
+.envelope-flap:after{content:"";position:absolute;inset:0;clip-path:polygon(0 0,100% 0,50% 58%);border-top:1px solid #e1c27b;filter:drop-shadow(0 2px 2px #0005)}
+.wax-seal{position:absolute;z-index:5;left:50%;top:47%;transform:translate(-50%,-50%);width:53px;height:53px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#e7c77e,#987039 72%);border:2px solid #f0d89b;color:#fff1c9;font:15px 'Playfair Display',serif;box-shadow:0 3px 9px #0007,inset 0 0 0 3px #a37b3f;transition:opacity .35s,transform .5s}
+.wax-seal span{font-size:9px;margin:0 1px}
+.envelope-wrap.opening .envelope-flap{transform:rotateX(180deg);z-index:0}
+.envelope-wrap.opening .wax-seal{opacity:0;transform:translate(-50%,-50%) scale(1.5) rotate(18deg)}
+.envelope-wrap.opening .envelope-letter{top:-60px;transform:translateY(-24px) scale(1.035);transition-delay:.45s}
+.envelope-sparkle{position:absolute;color:#f4dda7;text-shadow:0 0 15px #f4d18a;opacity:0}
+.sparkle-a{left:5%;top:30%}.sparkle-b{right:4%;top:17%}.sparkle-c{right:15%;bottom:18%}
+.envelope-wrap.opening .envelope-sparkle{animation:sparklePop 1.5s .4s both}
+@keyframes sparklePop{0%{opacity:0;transform:scale(.2) rotate(0)}35%{opacity:1;transform:scale(1.4) rotate(80deg)}100%{opacity:0;transform:scale(.5) rotate(160deg)}}
+.intro-copy{font-size:19px;line-height:1.45;color:#f2e7cf;margin:12px 0 18px}
+.intro-open{border:1px solid #e2c27a;background:linear-gradient(135deg,#e6c77e,#a77e3d);color:#17213a;padding:13px 28px;font:12px 'Playfair Display',serif;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;box-shadow:0 7px 24px #0004;transition:transform .25s,box-shadow .25s}
+.intro-open:hover{transform:translateY(-2px);box-shadow:0 10px 28px #0006}
+.intro-open span{margin-left:9px}
+.intro-open:disabled{opacity:.55;cursor:default}
+.intro-footnote{font:9px 'Playfair Display',serif;letter-spacing:.24em;color:#c6ad7c;margin-top:24px}
+.scroll-progress{position:fixed;top:0;left:0;width:0;height:3px;background:linear-gradient(90deg,#9a7135,#f3d995,#b58a48);z-index:20;box-shadow:0 0 10px #e8ca88}
+.hero-inner{transform-style:preserve-3d}
+.royal-scene{box-shadow:0 16px 42px #0006,inset 0 0 35px #e7c77f2b;transition:transform .8s ease,box-shadow .8s ease}
+.royal-scene:hover{transform:translateY(-3px);box-shadow:0 20px 48px #0007,inset 0 0 42px #e7c77f3d}
+.script{text-shadow:0 4px 24px #0008,0 0 22px #d8b66d33;animation:nameGlow 5s ease-in-out infinite alternate}
+@keyframes nameGlow{to{text-shadow:0 4px 25px #0008,0 0 32px #e4c47b66}}
+.calendar{box-shadow:0 12px 32px #0002;transition:transform .7s,box-shadow .7s}
+.calendar:hover{transform:translateY(-4px);box-shadow:0 18px 38px #0003}
+.marked{box-shadow:0 0 0 3px #d8b66d44;animation:datePulse 3s ease-in-out infinite}
+@keyframes datePulse{50%{box-shadow:0 0 0 7px #d8b66d12}}
+.event{position:relative;overflow:hidden;box-shadow:0 8px 24px #392b2010;transition:transform .65s cubic-bezier(.2,.7,.2,1),box-shadow .65s}
+.event:before{content:"";position:absolute;inset:0 auto 0 0;width:2px;background:linear-gradient(transparent,#d8b66d,transparent);transform:scaleY(0);transform-origin:bottom;transition:transform .7s}
+.event.visible{animation:eventArrive .85s both}
+.event:hover{transform:translateY(-6px);box-shadow:0 16px 34px #392b2020}
+.event:hover:before{transform:scaleY(1)}
+@keyframes eventArrive{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.dua{animation:duaGlow 5s ease-in-out infinite alternate;text-shadow:0 0 18px #e4c47b20}
+@keyframes duaGlow{to{text-shadow:0 0 28px #e4c47b55}}
+.music{display:flex;align-items:center;gap:9px;box-shadow:0 5px 20px #0004;transition:transform .25s,box-shadow .25s}
+.music:hover{transform:translateY(-2px);box-shadow:0 8px 24px #0006}
+.music-bars{display:inline-flex;align-items:center;gap:2px;height:13px}
+.music-bars i{display:block;width:2px;height:4px;background:#e6c77e;border-radius:2px}
+.music.playing .music-bars i{animation:equalize .75s ease-in-out infinite alternate}
+.music.playing .music-bars i:nth-child(2){animation-delay:.18s}.music.playing .music-bars i:nth-child(3){animation-delay:.36s}.music.playing .music-bars i:nth-child(4){animation-delay:.12s}
+@keyframes equalize{to{height:13px}}
+@media(max-width:650px){.intro-screen:before{inset:12px}.intro-screen:after{inset:18px}.intro-frame{padding:16px 10px}.envelope-wrap{height:205px}.envelope{height:162px}.envelope-letter{height:142px}.letter-names{font-size:34px}.intro-copy{font-size:18px}}
+@media(prefers-reduced-motion:reduce){.intro-stars,.marked,.script,.dua,.music.playing .music-bars i{animation:none!important}.intro-screen,.envelope-flap,.envelope-letter,.wax-seal{transition-duration:.01ms!important}.event{transition:none}}
+
 </style>
 </head>
 <body>
+<div class="intro-screen" id="introScreen" aria-label="Wedding invitation opening">
+  <div class="intro-stars"></div>
+  <div class="intro-frame">
+    <div class="intro-bismillah">﷽</div>
+    <div class="intro-kicker">A royal invitation</div>
+    <div class="envelope-wrap" id="envelopeWrap">
+      <div class="envelope-shadow"></div>
+      <div class="envelope">
+        <div class="envelope-letter"><span class="letter-flourish">✦</span><span class="letter-names">Farman <i>&amp;</i> Zuaina</span><span class="letter-date">NOVEMBER · 2026</span></div>
+        <div class="envelope-back"></div>
+        <div class="envelope-front"></div>
+        <div class="envelope-flap"></div>
+        <div class="wax-seal">F<span>&amp;</span>Z</div>
+      </div>
+      <div class="envelope-sparkle sparkle-a">✧</div><div class="envelope-sparkle sparkle-b">✦</div><div class="envelope-sparkle sparkle-c">✧</div>
+    </div>
+    <p class="intro-copy">You are cordially invited to share<br>in a celebration of love and blessings</p>
+    <button class="intro-open" id="openEnvelope" type="button">Open invitation <span>✧</span></button>
+    <div class="intro-footnote">PLEASE JOIN US IN OUR JOY</div>
+  </div>
+</div>
+<div class="scroll-progress" id="scrollProgress"></div>
+
 <header class="hero">
 <div class="stars"></div>
 <div class="hero-inner">
@@ -154,29 +244,57 @@ footer{text-align:center;padding:24px;background:#0b1325;color:#cbb98e;letter-sp
 
 <footer>FARMAN &amp; ZUAINA · NOVEMBER 2026</footer>
 <audio id="weddingAudio" src="wedding-music.mp3" preload="none" loop></audio>
-<button class="music" id="music" type="button" aria-label="Play music">♫ Play music</button>
+<button class="music" id="music" type="button" aria-label="Play music"><span class="music-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span id="musicLabel">Play music</span></button>
 <script>
 const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
 const weddingAudio=document.getElementById('weddingAudio');
 const musicButton=document.getElementById('music');
+const musicLabel=document.getElementById('musicLabel');
+weddingAudio.addEventListener('play',()=>musicButton.classList.add('playing'));
+weddingAudio.addEventListener('pause',()=>musicButton.classList.remove('playing'));
 musicButton.addEventListener('click',async()=>{
   if(weddingAudio.paused){
     try{
       await weddingAudio.play();
-      musicButton.textContent='♫ Pause music';
+      musicLabel.textContent='Pause music';
       musicButton.setAttribute('aria-label','Pause music');
     }catch(error){
-      musicButton.textContent='♫ Tap to play music';
+      musicLabel.textContent='Tap to play';
       console.error('Audio playback failed:',error);
     }
   }else{
     weddingAudio.pause();
-    musicButton.textContent='♫ Play music';
+    musicLabel.textContent='Play music';
     musicButton.setAttribute('aria-label','Play music');
   }
 });
+const introScreen=document.getElementById('introScreen');
+const envelopeWrap=document.getElementById('envelopeWrap');
+const openEnvelope=document.getElementById('openEnvelope');
+openEnvelope.addEventListener('click',()=>{
+  if(openEnvelope.disabled)return;
+  openEnvelope.disabled=true;
+  openEnvelope.textContent='Your invitation awaits';
+  envelopeWrap.classList.add('opening');
+  document.body.classList.add('invitation-opening');
+  window.setTimeout(()=>{
+    introScreen.classList.add('dismissed');
+    document.body.classList.remove('invitation-opening');
+    document.querySelector('.hero').scrollIntoView({behavior:'smooth',block:'start'});
+  },1750);
+  window.setTimeout(()=>introScreen.remove(),3000);
+});
+const scrollProgress=document.getElementById('scrollProgress');
+function updateProgress(){
+  const max=document.documentElement.scrollHeight-window.innerHeight;
+  scrollProgress.style.width=(max>0?(window.scrollY/max)*100:0)+'%';
+}
+window.addEventListener('scroll',updateProgress,{passive:true});
+window.addEventListener('resize',updateProgress);
+updateProgress();
+
 
 </script>
 </body>
