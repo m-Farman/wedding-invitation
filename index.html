@@ -251,7 +251,7 @@ footer{text-align:center;padding:24px;background:#0b1325;color:#cbb98e;letter-sp
 <div class="kicker">Save the dates</div><h2 class="heading">November 2026</h2><p class="body">Two special days, one lifetime of blessings.</p>
 <div class="calendar"><div class="month">NOVEMBER 2026</div><div class="days">
 <div class="dow">Sun</div><div class="dow">Mon</div><div class="dow">Tue</div><div class="dow">Wed</div><div class="dow">Thu</div><div class="dow">Fri</div><div class="dow">Sat</div>
-<div></div><div></div><div></div><div></div><div></div><div></div><div>1</div>
+<div>1</div>
 <div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div>
 <div>9</div><div>10</div><div>11</div><div>12</div><div>13</div><div>14</div><div>15</div>
 <div>16</div><div>17</div><div>18</div><div>19</div><div>20</div><div>21</div><div>22</div>
@@ -277,8 +277,7 @@ footer{text-align:center;padding:24px;background:#0b1325;color:#cbb98e;letter-sp
 </div></section>
 
 <footer>FARMAN &amp; ZUAINA · NOVEMBER 2026</footer>
-<audio id="weddingAudio" src="wedding-music.mp3" preload="none" loop></audio>
-<button class="music" id="music" type="button" aria-label="Play music"><span class="music-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span id="musicLabel">Play music</span></button>
+<audio id="weddingAudio" src="wedding-music.mp3" preload="auto" loop></audio>
 <script>
 const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
   if(entry.isIntersecting){
@@ -297,31 +296,13 @@ revealTargets.forEach((el,index)=>{
 });
 
 const weddingAudio=document.getElementById('weddingAudio');
-const musicButton=document.getElementById('music');
-const musicLabel=document.getElementById('musicLabel');
-weddingAudio.addEventListener('play',()=>musicButton.classList.add('playing'));
-weddingAudio.addEventListener('pause',()=>musicButton.classList.remove('playing'));
-musicButton.addEventListener('click',async()=>{
-  if(weddingAudio.paused){
-    try{
-      await weddingAudio.play();
-      musicLabel.textContent='Pause music';
-      musicButton.setAttribute('aria-label','Pause music');
-    }catch(error){
-      musicLabel.textContent='Tap to play';
-      console.error('Audio playback failed:',error);
-    }
-  }else{
-    weddingAudio.pause();
-    musicLabel.textContent='Play music';
-    musicButton.setAttribute('aria-label','Play music');
-  }
-});
 const introScreen=document.getElementById('introScreen');
 const envelopeWrap=document.getElementById('envelopeWrap');
 const openEnvelope=document.getElementById('openEnvelope');
 openEnvelope.addEventListener('click',()=>{
   if(openEnvelope.disabled)return;
+  // The visitor's tap is the user gesture that permits audible playback in most browsers.
+  weddingAudio.play().catch(error=>console.info('Browser did not allow automatic audio playback:',error));
   openEnvelope.disabled=true;
   openEnvelope.textContent='Opening your invitation…';
   envelopeWrap.classList.add('opening');
