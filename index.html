@@ -193,25 +193,6 @@ footer{text-align:center;padding:24px;background:#0b1325;color:#cbb98e;letter-sp
 @media(prefers-reduced-motion:reduce){.reveal-child{opacity:1;transform:none;transition:none}.envelope-wrap,.envelope,.envelope-flap,.envelope-front,.envelope-letter,.intro-frame{transition-duration:.01ms!important}}
 
 
-/* Original self-contained cinematic wedding illustration — no hosted animation service */
-.cinematic-scene{height:clamp(230px,43vw,330px);width:min(760px,92vw);border:1px solid #d8b66d88;border-radius:12px 12px 5px 5px;background:#111a2e;overflow:hidden;isolation:isolate}
-.cinematic-scene:before{inset:7px 8% 0;border-width:2px;border-bottom:0;border-radius:48% 48% 0 0;opacity:.6;z-index:1;pointer-events:none}
-.cinematic-scene:after{display:none}
-.wedding-art{position:absolute;inset:0;width:100%;height:100%;z-index:0}
-.scene-vignette{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(90deg,#0a122533,transparent 22%,transparent 78%,#0a122533),linear-gradient(0deg,#0a122655,transparent 36%)}
-.scene-groom{animation:groomCinematic 7s cubic-bezier(.2,.7,.2,1) both;transform-box:fill-box;transform-origin:center bottom}
-.scene-bride{animation:brideCinematic 7s cubic-bezier(.2,.7,.2,1) both;transform-box:fill-box;transform-origin:center bottom}
-@keyframes groomCinematic{0%{opacity:0;transform:translate(-68px,10px)}12%{opacity:1}58%,100%{opacity:1;transform:translate(0,0)}}
-@keyframes brideCinematic{0%{opacity:0;transform:translate(68px,10px)}16%{opacity:1}64%,100%{opacity:1;transform:translate(0,0)}}
-.scene-lantern{transform-box:fill-box;transform-origin:center;animation:lanternSway 4.5s ease-in-out infinite alternate}
-.right-lantern{animation-delay:1.3s}
-@keyframes lanternSway{to{transform:rotate(3deg);filter:brightness(1.25)}}
-.floating-petals{animation:petalsDrift 9s ease-in-out infinite alternate;transform-box:fill-box}
-@keyframes petalsDrift{to{transform:translate(8px,20px) rotate(9deg)}}
-.scene-caption{position:absolute;z-index:3;bottom:12px;left:0;right:0;text-align:center;font:clamp(9px,1.7vw,12px) 'Playfair Display',serif;letter-spacing:.18em;text-transform:uppercase;color:#f0d9a7;text-shadow:0 2px 8px #091020;opacity:.88}
-@media(max-width:650px){.cinematic-scene{height:clamp(205px,58vw,260px)}}
-@media(prefers-reduced-motion:reduce){.scene-groom,.scene-bride,.scene-lantern,.floating-petals{animation:none!important}.scene-groom{transform:translate(0,0)}.scene-bride{transform:translate(0,0)}}
-
 </style>
 </head>
 <body>
@@ -244,84 +225,15 @@ footer{text-align:center;padding:24px;background:#0b1325;color:#cbb98e;letter-sp
 <div class="bismi">﷽</div>
 <div class="eyebrow">A joyful celebration of love and togetherness</div><div class="rule"></div>
 <div class="eyebrow">The wedding celebrations of</div>
-<div class="royal-scene cinematic-scene" role="img" aria-label="An original animated, illustrated wedding procession beneath an ornate Mughal arch">
-  <div class="scene-vignette"></div>
-  <svg class="wedding-art" viewBox="0 0 800 360" role="presentation" aria-hidden="true">
-    <defs>
-      <linearGradient id="nightSky" x2="0" y2="1"><stop stop-color="#101a31"/><stop offset=".72" stop-color="#263653"/><stop offset="1" stop-color="#111a2c"/></linearGradient>
-      <linearGradient id="goldStone" x2="1"><stop stop-color="#76542e"/><stop offset=".22" stop-color="#f1d18b"/><stop offset=".52" stop-color="#a57a3d"/><stop offset=".8" stop-color="#f4d99d"/><stop offset="1" stop-color="#73512d"/></linearGradient>
-      <linearGradient id="ivorySilk" x2="1"><stop stop-color="#a98b5b"/><stop offset=".38" stop-color="#fff1d0"/><stop offset=".72" stop-color="#dfc18b"/><stop offset="1" stop-color="#8f6a3e"/></linearGradient>
-      <linearGradient id="burgundySilk" x2="1"><stop stop-color="#4d1428"/><stop offset=".42" stop-color="#a43c53"/><stop offset=".7" stop-color="#6e2038"/><stop offset="1" stop-color="#3b1025"/></linearGradient>
-      <linearGradient id="veilSilk" x2="1" y2="1"><stop stop-color="#fff0d5" stop-opacity=".9"/><stop offset=".5" stop-color="#e9d2a8" stop-opacity=".46"/><stop offset="1" stop-color="#fff5df" stop-opacity=".08"/></linearGradient>
-      <radialGradient id="lanternGlow"><stop stop-color="#ffe9a7" stop-opacity=".8"/><stop offset="1" stop-color="#e9b75b" stop-opacity="0"/></radialGradient>
-      <filter id="softGlow"><feGaussianBlur stdDeviation="5"/></filter>
-    </defs>
-    <rect width="800" height="360" fill="url(#nightSky)"/>
-    <g fill="#f4dfae" opacity=".65"><circle cx="98" cy="56" r="1.5"/><circle cx="172" cy="88" r="1"/><circle cx="623" cy="61" r="1.4"/><circle cx="704" cy="104" r="1"/><circle cx="560" cy="37" r="1.2"/><circle cx="244" cy="42" r="1"/></g>
-    <path d="M74 360V178C74 64 205 12 400 12s326 52 326 166v182" fill="none" stroke="#8b693e" stroke-width="28" opacity=".32"/>
-    <path d="M91 360V181C91 77 220 31 400 31s309 46 309 150v179" fill="none" stroke="url(#goldStone)" stroke-width="9"/>
-    <path d="M117 360V185C117 95 235 54 400 54s283 41 283 131v175" fill="none" stroke="#f1d28f" stroke-width="2" opacity=".75"/>
-    <g fill="none" stroke="url(#goldStone)" stroke-width="3" opacity=".85">
-      <path d="M150 360V190c0-75 103-111 250-111s250 36 250 111v170"/>
-      <path d="M176 360V194c0-60 92-91 224-91s224 31 224 91v166"/>
-      <path d="M200 360V199c0-48 81-72 200-72s200 24 200 72v161"/>
-    </g>
-    <g fill="url(#goldStone)" opacity=".95">
-      <path d="M73 360V170h24v190zM703 360V170h24v190z"/>
-      <path d="M63 170h44v12H63zM693 170h44v12h-44z"/>
-      <path d="M62 204h46v7H62zM692 204h46v7h-46z"/>
-      <path d="M68 236h34v5H68zM698 236h34v5h-34z"/>
-    </g>
-    <g stroke="#e8c77d" fill="none" opacity=".8"><path d="M83 160q12-28 24 0m586 0q12-28 24 0"/><path d="M84 152h22m586 0h22"/></g>
-    <g class="scene-lantern left-lantern">
-      <circle cx="178" cy="155" r="42" fill="url(#lanternGlow)" filter="url(#softGlow)"/>
-      <path d="M178 106v17m-14 0h28l-4 13h-20z" stroke="#e9c77e" fill="#9a713d" stroke-width="2"/>
-      <path d="M163 136h30l-3 35-12 12-12-12z" fill="#bd8745" stroke="#f5d99c" stroke-width="2"/>
-      <path d="M168 141h20v25h-20z" fill="#ffe5a1" opacity=".85"/><path d="M178 184v13" stroke="#e9c77e" stroke-width="2"/>
-    </g>
-    <g class="scene-lantern right-lantern">
-      <circle cx="622" cy="155" r="42" fill="url(#lanternGlow)" filter="url(#softGlow)"/>
-      <path d="M622 106v17m-14 0h28l-4 13h-20z" stroke="#e9c77e" fill="#9a713d" stroke-width="2"/>
-      <path d="M607 136h30l-3 35-12 12-12-12z" fill="#bd8745" stroke="#f5d99c" stroke-width="2"/>
-      <path d="M612 141h20v25h-20z" fill="#ffe5a1" opacity=".85"/><path d="M622 184v13" stroke="#e9c77e" stroke-width="2"/>
-    </g>
-    <path d="M0 321q130-28 260 0t280 0 260 0v39H0z" fill="#0b1426" opacity=".72"/>
-    <path d="M0 337q200-23 400 0t400 0" stroke="#d8b66d" stroke-width="1.5" opacity=".65" fill="none"/>
-    <g class="scene-groom">
-      <ellipse cx="322" cy="329" rx="45" ry="8" fill="#050b16" opacity=".55"/>
-      <path d="M305 282l-8 43h16l11-39 10 39h16l-6-48" fill="#1b2030" stroke="#d6bd8c" stroke-width="1.5"/>
-      <path d="M300 166q22-17 46 0l18 116q-42 17-84 0z" fill="url(#ivorySilk)" stroke="#e8cf9c" stroke-width="2"/>
-      <path d="M321 170l8 108m-25-90 17 13 18-13" fill="none" stroke="#a27a43" stroke-width="2"/>
-      <path d="M303 183l-19 54 10 5 28-42m23-17 18 55-10 5-25-42" fill="url(#ivorySilk)" stroke="#e8cf9c" stroke-width="2"/>
-      <path d="M315 145q10-13 22 0l-2 28h-19z" fill="#b77e5c"/>
-      <path d="M311 148q-1-20 17-22 19 3 17 22l-7 7h-22z" fill="#9a7043" stroke="#e6c77e" stroke-width="2"/>
-      <path d="M309 142q-4-18 17-23 22 1 25 20l-7 2q-10-11-34 2z" fill="#e7d3a7" stroke="#f2dfb2" stroke-width="2"/>
-      <path d="M319 159q8 8 16 0" stroke="#6e4634" stroke-width="1.5" fill="none"/>
-      <path d="M300 174q-12 12-14 33m67-33q13 13 14 33" stroke="#d9b66d" stroke-width="3" fill="none"/>
-      <path d="M309 185l13 14 13-14" stroke="#f8e5b6" stroke-width="2" fill="none"/>
-      <path d="M328 198l-5 23" stroke="#d8b66d" stroke-width="2"/>
-    </g>
-    <g class="scene-bride">
-      <ellipse cx="482" cy="330" rx="57" ry="8" fill="#050b16" opacity=".55"/>
-      <path d="M464 276q18 8 36 0l13 52h-64z" fill="#4b142a"/>
-      <path d="M470 167q13-12 27 0l46 157q-60 18-122 0l45-157z" fill="url(#burgundySilk)" stroke="#e4bf78" stroke-width="2"/>
-      <path d="M482 178l-1 135m-24-100 24 18 25-18" stroke="#e9c77e" stroke-width="2" fill="none"/>
-      <path d="M451 207q-14 34-26 69m92-69q16 34 27 69" stroke="#b9864e" stroke-width="12" stroke-linecap="round" fill="none"/>
-      <path d="M451 207q-14 34-26 69m92-69q16 34 27 69" stroke="#e4c27f" stroke-width="2" stroke-linecap="round" fill="none"/>
-      <path d="M475 145q12-12 25 0l-2 31h-22z" fill="#a96f52"/>
-      <path d="M464 147q0-24 24-25 24 5 23 29l-8 12h-32z" fill="#21151c"/>
-      <path d="M459 143q8-29 31-30 24 5 34 33l-10 7q-18-18-46 0z" fill="url(#burgundySilk)" stroke="#e6c77e" stroke-width="2"/>
-      <path d="M461 145q-18 29-14 74l-8 104q43 18 91 0l-8-104q3-48-17-74" fill="url(#veilSilk)" stroke="#efdcb7" stroke-width="1.5" opacity=".92"/>
-      <path d="M460 149q-10 62 0 153m47-153q15 65 7 153" stroke="#f7e8c9" stroke-width="2" opacity=".55" fill="none"/>
-      <path d="M478 159q8 8 17 0" stroke="#754333" stroke-width="1.5" fill="none"/>
-      <g fill="#e6c77e"><circle cx="464" cy="153" r="3"/><circle cx="491" cy="153" r="3"/><path d="M478 135l3 8-3 5-3-5z"/></g>
-      <path d="M459 187q-8 25-5 49m51-49q10 25 6 49" stroke="#e7c77e" stroke-width="2" fill="none"/>
-      <g fill="#d8b66d"><circle cx="429" cy="278" r="3"/><circle cx="535" cy="278" r="3"/><circle cx="482" cy="311" r="3"/></g>
-    </g>
-    <g class="floating-petals" fill="#e8a6a7"><path d="M248 90q14-13 17 4-11 8-17-4z"/><path d="M570 100q14-13 17 4-11 8-17-4z"/><path d="M390 68q14-13 17 4-11 8-17-4z"/><path d="M650 220q14-13 17 4-11 8-17-4z"/><path d="M150 250q14-13 17 4-11 8-17-4z"/></g>
-    <g fill="#e8c77f" opacity=".8"><path d="M400 18l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/><path d="M270 125l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/><path d="M530 125l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></g>
-  </svg>
-  <div class="scene-caption">A celebration of two families, joined in love</div>
+<div class="royal-scene" role="img" aria-label="A bride and groom enter together beneath a royal floral arch">
+  <div class="arch-pillar left"></div><div class="arch-pillar right"></div>
+  <span class="lantern l1">✧</span><span class="lantern l2">✧</span>
+  <span class="petal">❀</span><span class="petal">✿</span><span class="petal">❀</span><span class="petal">✿</span><span class="petal">❀</span>
+  <div class="entrance-couple">
+    <div class="entrance-person groom"><span class="person-head"></span><span class="person-body"></span><span class="person-leg"></span></div>
+    <div class="entrance-person bride"><span class="person-head"></span><span class="veil"></span><span class="person-body"></span></div>
+  </div>
+  <div class="flower-border"><span>✿</span><span>❀</span><span>✿</span><span>❀</span><span>✿</span><span>❀</span><span>✿</span></div>
 </div>
 <h1 class="script">Farman <span class="amp">&amp;</span> Zuaina</h1><div class="rule"></div>
 <p>With the blessings of the Almighty,<br>you are warmly invited to celebrate<br>two beautiful occasions.</p>
