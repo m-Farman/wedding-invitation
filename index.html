@@ -18,8 +18,45 @@ section{padding:78px 20px}.paper{background:var(--cream);color:var(--ink)}.dark{
 .reveal{opacity:0;transform:translateY(22px);transition:.9s}.reveal.visible{opacity:1;transform:none}.music{position:fixed;right:16px;bottom:16px;z-index:5;border:1px solid var(--gold);border-radius:30px;background:#101b35ed;color:#f0dca7;padding:10px 14px;cursor:pointer}
 @media(max-width:650px){section{padding:62px 17px}.events{grid-template-columns:1fr}.calendar{padding:18px 9px}.days{gap:3px}.days div{padding:8px 0}.hero:before{inset:12px}.hero:after{inset:18px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
-</style></head><body>
-<header class="hero"><div class="stars"></div><div class="hero-inner"><div class="bismi">﷽</div><div class="eyebrow">A joyful celebration of love and togetherness</div><div class="rule"></div><div class="eyebrow">The wedding celebrations of</div><h1 class="script">Farman <span class="amp">&amp;</span> Zuaina</h1><div class="rule"></div><p>With the blessings of the Almighty,<br>you are warmly invited to celebrate<br>two beautiful occasions.</p><button class="open" onclick="document.querySelector('#invite').scrollIntoView({behavior:'smooth'})">Open Invitation ↓</button></div></header>
+
+/* Wedding animation enhancements */
+.couple-stage{width:min(340px,82vw);height:205px;margin:8px auto 2px;position:relative}
+.couple-stage svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 8px 18px #0007)}
+.dancer{transform-box:fill-box;transform-origin:50% 90%;animation:sway 3.8s ease-in-out infinite}
+.dancer.bride{animation-delay:-1.9s}
+.veil{transform-origin:50% 0;animation:veilflow 4s ease-in-out infinite}
+.spark{animation:sparkle 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.spark:nth-of-type(2n){animation-delay:.8s}
+@keyframes sway{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(3deg) translateY(-5px)}}
+@keyframes veilflow{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(3deg)}}
+@keyframes sparkle{0%,100%{opacity:.2;transform:scale(.65)}50%{opacity:1;transform:scale(1.2)}}
+.music-note{position:fixed;right:18px;bottom:65px;color:#e8cb8a;font-size:17px;pointer-events:none;opacity:0}
+.music-note.playing{animation:floatnote 3s ease-in-out infinite}
+@keyframes floatnote{0%{opacity:0;transform:translateY(12px) rotate(-12deg)}25%{opacity:1}100%{opacity:0;transform:translateY(-65px) rotate(15deg)}}
+@media(prefers-reduced-motion:reduce){.dancer,.veil,.spark,.music-note{animation:none!important}}
+\n</style></head><body>
+<header class="hero"><div class="stars"></div><div class="hero-inner"><div class="bismi">﷽</div><div class="eyebrow">A joyful celebration of love and togetherness</div><div class="rule"></div><div class="eyebrow">The wedding celebrations of</div><h1 class="script">Farman <span class="amp">&amp;</span> Zuaina</h1><div class="rule"></div>
+<div class="couple-stage" aria-label="An animated illustration of a bride and groom dancing together">
+<svg viewBox="0 0 340 205" role="img" aria-hidden="true">
+<g fill="#e7c77f" opacity=".9">
+<path class="spark" d="M48 38l4 10 10 4-10 4-4 10-4-10-10-4 10-4z"/><path class="spark" d="M284 25l3 8 8 3-8 3-3 8-3-8-8-3 8-3z"/><circle class="spark" cx="82" cy="88" r="2.5"/><circle class="spark" cx="255" cy="76" r="2.5"/><circle class="spark" cx="305" cy="123" r="2"/>
+</g>
+<ellipse cx="170" cy="188" rx="112" ry="9" fill="#070d1c" opacity=".35"/>
+<g class="dancer groom">
+<path d="M132 88Q170 72 192 91L207 164Q170 176 122 160Z" fill="#17243d" stroke="#d8b66d" stroke-width="2"/>
+<path d="M153 91l17 20 17-20-8 72h-18z" fill="#f4ead4"/><path d="M167 111l7 0-3 12 5 36h-13l6-36z" fill="#a23a43"/>
+<circle cx="166" cy="64" r="19" fill="#c58e65"/><path d="M147 63Q146 39 167 39Q188 42 185 65L179 53Q164 58 149 52Z" fill="#171a22"/>
+<path d="M137 101Q115 117 103 133" fill="none" stroke="#c58e65" stroke-width="10" stroke-linecap="round"/>
+</g>
+<g class="dancer bride">
+<path d="M199 92Q224 79 244 99L271 177Q225 194 181 176Z" fill="#8e283c" stroke="#e0bd77" stroke-width="2"/>
+<path d="M202 93Q223 75 245 95Q255 112 260 140Q220 153 188 139Z" fill="#a83c50"/>
+<circle cx="222" cy="63" r="18" fill="#b87958"/><path d="M204 63Q202 36 224 37Q245 39 241 66L237 50Q222 57 206 51Z" fill="#17131a"/>
+<path class="veil" d="M207 50Q224 30 245 50L271 117Q251 130 241 106L231 67Q219 83 209 106L194 100Z" fill="#e8d5b5" opacity=".8"/>
+<path d="M199 104Q181 111 170 123" fill="none" stroke="#b87958" stroke-width="9" stroke-linecap="round"/>
+</g>
+<path d="M170 123Q182 109 194 116" fill="none" stroke="#e8c982" stroke-width="3" stroke-linecap="round"/>
+</svg></div><p>With the blessings of the Almighty,<br>you are warmly invited to celebrate<br>two beautiful occasions.</p><button class="open" onclick="document.querySelector('#invite').scrollIntoView({behavior:'smooth'})">Open Invitation ↓</button></div></header>
 <section class="paper" id="invite"><div class="inner reveal"><div class="kicker">With warm regards</div><h2 class="heading">A Cordial Invitation</h2><p class="host">Mrs. &amp; Mr.<br><strong>Haji Abdul Majid</strong></p><div class="rule"></div><p class="body">cordially invite you to join them and bless the joyous celebrations of the<br><strong>Nikah-e-Masnoon</strong> and <strong>Mehfil-e-Walima</strong><br>of their beloved children</p><div class="couple">Farman <span style="font: .48em 'Playfair Display'">&amp;</span> Zuaina</div></div></section>
 <section class="dark"><div class="inner reveal"><div class="kicker">Save the dates</div><h2 class="heading">November 2026</h2><p class="body">Two special days, one lifetime of blessings.</p><div class="calendar"><div class="month">NOVEMBER 2026</div><div class="days">
 <div class="dow">Sun</div><div class="dow">Mon</div><div class="dow">Tue</div><div class="dow">Wed</div><div class="dow">Thu</div><div class="dow">Fri</div><div class="dow">Sat</div>
@@ -32,5 +69,31 @@ section{padding:78px 20px}.paper{background:var(--cream);color:var(--ink)}.dark{
 <footer>FARMAN &amp; ZUAINA · NOVEMBER 2026</footer><button class="music" id="music">♫ Enable ambient tone</button>
 <script>
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.12});document.querySelectorAll('.reveal').forEach(x=>io.observe(x));
-let ctx=null,osc=[],on=false;document.getElementById('music').onclick=()=>{let b=document.getElementById('music');if(!on){ctx=new(window.AudioContext||window.webkitAudioContext)();let m=ctx.createGain();m.gain.value=.018;m.connect(ctx.destination);[196,293.66,392].forEach((f,i)=>{let o=ctx.createOscillator(),g=ctx.createGain();o.type=i?'triangle':'sine';o.frequency.value=f;g.gain.value=i?.15:.5;o.connect(g);g.connect(m);o.start();osc.push(o)});on=true;b.textContent='♫ Turn ambient tone off'}else{osc.forEach(o=>o.stop());osc=[];ctx.close();ctx=null;on=false;b.textContent='♫ Enable ambient tone'}};
-</script></body></html>
+
+let audioCtx=null, musicTimer=null, musicOn=false, noteIndex=0, master=null;
+const melody=[392,440,523.25,587.33,523.25,440,392,329.63,349.23,392,440,392,349.23,293.66,329.63,392];
+const chordSets=[[196,246.94,293.66],[174.61,220,261.63],[146.83,185,220],[164.81,207.65,246.94]];
+function playTone(freq,when,duration,kind='sine',volume=.035){
+ const o=audioCtx.createOscillator(),g=audioCtx.createGain(),f=audioCtx.createBiquadFilter();
+ o.type=kind;o.frequency.setValueAtTime(freq,when);f.type='lowpass';f.frequency.value=kind==='sawtooth'?1250:2400;
+ g.gain.setValueAtTime(.0001,when);g.gain.exponentialRampToValueAtTime(volume,when+.12);g.gain.exponentialRampToValueAtTime(.0001,when+duration);
+ o.connect(f);f.connect(g);g.connect(master);o.start(when);o.stop(when+duration+.05);
+}
+function musicStep(){
+ if(!audioCtx||!musicOn)return;
+ const t=audioCtx.currentTime, n=noteIndex%melody.length, chord=chordSets[Math.floor(noteIndex/4)%chordSets.length];
+ chord.forEach((f,i)=>playTone(f/2,t+i*.035,1.65,'sine',.012));
+ playTone(melody[n],t,.78,'triangle',.025);
+ if(noteIndex%4===0)playTone(melody[n]*2,t+.12,1.1,'sine',.009);
+ noteIndex++;
+}
+function stopMusic(){musicOn=false;if(musicTimer)clearInterval(musicTimer);musicTimer=null;if(audioCtx){audioCtx.close();audioCtx=null}document.getElementById('music').textContent='♫ Play wedding music';}
+document.getElementById('music').textContent='♫ Play wedding music';
+document.getElementById('music').onclick=async()=>{
+ if(musicOn){stopMusic();return}
+ const AC=window.AudioContext||window.webkitAudioContext;if(!AC){document.getElementById('music').textContent='Music unavailable';return}
+ audioCtx=new AC();await audioCtx.resume();master=audioCtx.createGain();master.gain.value=.58;master.connect(audioCtx.destination);
+ musicOn=true;noteIndex=0;musicStep();musicTimer=setInterval(musicStep,620);
+ document.getElementById('music').textContent='♫ Pause wedding music';
+};
+\n</script></body></html>
