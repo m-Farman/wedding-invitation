@@ -201,16 +201,17 @@ footer{text-align:center;padding:24px;background:#0b1325;color:#cbb98e;letter-sp
 @keyframes hintBreathe{50%{opacity:.68}}
 .intro-open{position:relative;animation:openButtonGlow 2.3s ease-in-out infinite}
 @keyframes openButtonGlow{50%{box-shadow:0 7px 30px #e8c77e66,0 0 0 5px #e8c77e18}}
-.scroll-cue{position:absolute;z-index:8;bottom:-19px;left:50%;transform:translateX(-50%);width:min(270px,78vw);display:flex;flex-direction:column;align-items:center;gap:7px;padding:13px 18px 0;color:#f3dfb4;pointer-events:none;text-align:center;filter:drop-shadow(0 5px 12px #0008);transition:opacity .75s ease,transform .75s ease}
-.scroll-cue:before{content:"";position:absolute;inset:0 0 12px;border:1px solid #d8b66d88;border-radius:14px;background:linear-gradient(180deg,#101b35f2,#101b35dd);box-shadow:0 0 0 5px #d8b66d12,0 8px 25px #0005;z-index:-1}
-.scroll-cue-label{font:12px 'Playfair Display',serif;letter-spacing:.16em;text-transform:uppercase}
-.scroll-cue-sub{font:11px 'Cormorant Garamond',serif;letter-spacing:.06em;color:#ddc99e;margin-top:-2px}
-.scroll-cue-arrow{height:54px;width:72px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:0;animation:bigArrowBounce 1.25s ease-in-out infinite}
-.scroll-cue-arrow i{display:block;width:34px;height:34px;border-right:5px solid #f0d18a;border-bottom:5px solid #f0d18a;transform:rotate(45deg);border-radius:2px;margin-top:-13px;filter:drop-shadow(0 2px 5px #e5bd6b66)}
-.scroll-cue-arrow i+ i{margin-top:-23px;opacity:.58;transform:rotate(45deg) scale(.78)}
-@keyframes bigArrowBounce{0%,100%{transform:translateY(-3px)}50%{transform:translateY(8px)}}
-.scroll-cue.hidden{opacity:0;transform:translate(-50%,25px);visibility:hidden}
-@media(max-width:650px){.scroll-cue{bottom:-16px;padding-top:11px;width:240px}.scroll-cue-label{font-size:11px}.scroll-cue-arrow{height:48px}.scroll-cue-arrow i{width:30px;height:30px}}
+.scroll-cue{position:absolute;z-index:12;bottom:18px;left:50%;transform:translateX(-50%);width:min(300px,82vw);display:flex;flex-direction:column;align-items:center;gap:7px;padding:13px 18px 14px;color:#f7e4b9;pointer-events:none;text-align:center;filter:drop-shadow(0 7px 14px #0009);opacity:1;visibility:visible;transition:opacity .7s ease,transform .7s ease}
+.scroll-cue:before{content:"";position:absolute;inset:0;border:1px solid #e2c27a;border-radius:15px;background:linear-gradient(180deg,#101b35f5,#101b35e8);box-shadow:0 0 0 5px #d8b66d20,0 8px 28px #0007;z-index:-1}
+.scroll-cue-label{font:12px 'Playfair Display',serif;letter-spacing:.17em;text-transform:uppercase}
+.scroll-cue-sub{font:12px 'Cormorant Garamond',serif;letter-spacing:.06em;color:#ead6aa}
+.scroll-cue-arrows{height:67px;width:100px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;animation:bigArrowBounce 1.2s ease-in-out infinite}
+.cue-chevron{display:block;width:48px;height:48px;border-right:6px solid #f0cf7c;border-bottom:6px solid #f0cf7c;transform:rotate(45deg);border-radius:2px;margin-top:-26px;filter:drop-shadow(0 2px 6px #e5bd6b88)}
+.cue-chevron:first-child{margin-top:-3px}
+.cue-chevron+ .cue-chevron{opacity:.68;transform:rotate(45deg) scale(.82);margin-top:-32px}
+@keyframes bigArrowBounce{0%,100%{transform:translateY(-4px)}50%{transform:translateY(9px)}}
+.scroll-cue.hidden{opacity:0;transform:translate(-50%,24px);visibility:hidden}
+@media(max-width:650px){.scroll-cue{bottom:14px;width:270px;padding:11px 15px 12px}.scroll-cue-label{font-size:11px}.scroll-cue-arrows{height:60px}.cue-chevron{width:43px;height:43px;border-width:5px}}
 
 .music-control{position:fixed;right:17px;bottom:17px;z-index:25;display:flex;align-items:center;gap:9px;border:1px solid #d8b66d;background:#101b35ed;color:#f0dca7;padding:11px 15px;border-radius:28px;font:12px 'Playfair Display',serif;letter-spacing:.06em;box-shadow:0 5px 20px #0005;cursor:pointer;backdrop-filter:blur(8px);transition:transform .2s,background .2s}
 .music-control:hover{transform:translateY(-2px);background:#1b2a49}
@@ -218,7 +219,7 @@ footer{text-align:center;padding:24px;background:#0b1325;color:#cbb98e;letter-sp
 .music-symbol{font:15px Arial,sans-serif;min-width:12px;text-align:center}
 .music-control.is-playing .music-symbol{animation:musicPulse 1s ease-in-out infinite alternate}
 @keyframes musicPulse{to{text-shadow:0 0 10px #f0dca7;transform:scale(1.12)}}
-@media(max-width:650px){.scroll-cue{bottom:18px}.music-control{right:12px;bottom:12px;padding:10px 13px}}
+@media(max-width:650px){.music-control{right:12px;bottom:12px;padding:10px 13px}}
 @media(prefers-reduced-motion:reduce){.tap-hint,.tap-ring,.intro-open,.scroll-cue b,.scroll-mouse i,.music-symbol{animation:none!important}}
 
 </style>
@@ -269,8 +270,8 @@ footer{text-align:center;padding:24px;background:#0b1325;color:#cbb98e;letter-sp
 <button class="open" onclick="document.querySelector('#invite').scrollIntoView({behavior:'smooth'})">Open Invitation ↓</button>
 </div>
 <div class="scroll-cue" id="scrollCue" aria-label="Scroll down to explore the invitation">
-  <span class="scroll-cue-label">Scroll down to explore</span>
-  <span class="scroll-cue-arrow" aria-hidden="true"><i></i><i></i></span>
+  <span class="scroll-cue-label">SCROLL DOWN TO EXPLORE</span>
+  <span class="scroll-cue-arrows" aria-hidden="true"><span class="cue-chevron"></span><span class="cue-chevron"></span></span>
   <span class="scroll-cue-sub">Discover the celebrations</span>
 </div>
 </header>
@@ -370,20 +371,28 @@ openEnvelope.addEventListener('click',()=>{
   window.setTimeout(()=>{
     introScreen.remove();
     document.querySelector('.hero').classList.add('hero-arrived');
+    showScrollCue();
   },3550);
 });
 const scrollCue=document.getElementById('scrollCue');
 let scrollHintDismissed=false;
+let scrollHintTimer=null;
 function dismissScrollCue(){
   if(scrollHintDismissed)return;
   scrollHintDismissed=true;
   scrollCue.classList.add('hidden');
   window.removeEventListener('scroll',onFirstScroll);
+  if(scrollHintTimer)window.clearTimeout(scrollHintTimer);
 }
 function onFirstScroll(){if(window.scrollY>45)dismissScrollCue();}
-window.addEventListener('scroll',onFirstScroll,{passive:true});
-// Give first-time visitors a clear visual prompt, then quietly clear it if they do not scroll.
-window.setTimeout(dismissScrollCue,12000);
+function showScrollCue(){
+  if(scrollHintDismissed)return;
+  scrollCue.classList.remove('hidden');
+  window.addEventListener('scroll',onFirstScroll,{passive:true});
+  scrollHintTimer=window.setTimeout(dismissScrollCue,12000);
+}
+// Start the onboarding hint only after the envelope has opened and the hero is visible.
+
 const detail=document.getElementById('calendarDetail');
 const dateButtons=document.querySelectorAll('.calendar-date');
 const eventInfo={
