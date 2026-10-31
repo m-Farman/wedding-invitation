@@ -201,12 +201,17 @@ footer{text-align:center;padding:24px;background:#0b1325;color:#cbb98e;letter-sp
 @keyframes hintBreathe{50%{opacity:.68}}
 .intro-open{position:relative;animation:openButtonGlow 2.3s ease-in-out infinite}
 @keyframes openButtonGlow{50%{box-shadow:0 7px 30px #e8c77e66,0 0 0 5px #e8c77e18}}
-.scroll-cue{position:absolute;z-index:4;bottom:22px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:#e6cf9e;font:10px 'Playfair Display',serif;letter-spacing:.2em;text-transform:uppercase;opacity:.9;transition:opacity .5s,transform .5s;pointer-events:none}
-.scroll-cue b{font:22px serif;line-height:1;animation:scrollNudge 1.5s ease-in-out infinite}
-.scroll-mouse{width:18px;height:28px;border:1px solid #dfc27f;border-radius:12px;display:block;position:relative}
-.scroll-mouse i{position:absolute;top:5px;left:7px;width:2px;height:5px;border-radius:2px;background:#f0dca7;animation:mouseWheel 1.5s ease-in-out infinite}
-@keyframes mouseWheel{0%{opacity:0;transform:translateY(0)}35%{opacity:1}100%{opacity:0;transform:translateY(9px)}}
-.scroll-cue.hidden{opacity:0;transform:translate(-50%,12px)}
+.scroll-cue{position:absolute;z-index:8;bottom:-19px;left:50%;transform:translateX(-50%);width:min(270px,78vw);display:flex;flex-direction:column;align-items:center;gap:7px;padding:13px 18px 0;color:#f3dfb4;pointer-events:none;text-align:center;filter:drop-shadow(0 5px 12px #0008);transition:opacity .75s ease,transform .75s ease}
+.scroll-cue:before{content:"";position:absolute;inset:0 0 12px;border:1px solid #d8b66d88;border-radius:14px;background:linear-gradient(180deg,#101b35f2,#101b35dd);box-shadow:0 0 0 5px #d8b66d12,0 8px 25px #0005;z-index:-1}
+.scroll-cue-label{font:12px 'Playfair Display',serif;letter-spacing:.16em;text-transform:uppercase}
+.scroll-cue-sub{font:11px 'Cormorant Garamond',serif;letter-spacing:.06em;color:#ddc99e;margin-top:-2px}
+.scroll-cue-arrow{height:54px;width:72px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:0;animation:bigArrowBounce 1.25s ease-in-out infinite}
+.scroll-cue-arrow i{display:block;width:34px;height:34px;border-right:5px solid #f0d18a;border-bottom:5px solid #f0d18a;transform:rotate(45deg);border-radius:2px;margin-top:-13px;filter:drop-shadow(0 2px 5px #e5bd6b66)}
+.scroll-cue-arrow i+ i{margin-top:-23px;opacity:.58;transform:rotate(45deg) scale(.78)}
+@keyframes bigArrowBounce{0%,100%{transform:translateY(-3px)}50%{transform:translateY(8px)}}
+.scroll-cue.hidden{opacity:0;transform:translate(-50%,25px);visibility:hidden}
+@media(max-width:650px){.scroll-cue{bottom:-16px;padding-top:11px;width:240px}.scroll-cue-label{font-size:11px}.scroll-cue-arrow{height:48px}.scroll-cue-arrow i{width:30px;height:30px}}
+
 .music-control{position:fixed;right:17px;bottom:17px;z-index:25;display:flex;align-items:center;gap:9px;border:1px solid #d8b66d;background:#101b35ed;color:#f0dca7;padding:11px 15px;border-radius:28px;font:12px 'Playfair Display',serif;letter-spacing:.06em;box-shadow:0 5px 20px #0005;cursor:pointer;backdrop-filter:blur(8px);transition:transform .2s,background .2s}
 .music-control:hover{transform:translateY(-2px);background:#1b2a49}
 .music-control:focus-visible,.intro-open:focus-visible{outline:2px solid #fff1c9;outline-offset:4px}
@@ -263,7 +268,11 @@ footer{text-align:center;padding:24px;background:#0b1325;color:#cbb98e;letter-sp
 <p>With the blessings of the Almighty,<br>you are warmly invited to celebrate<br>two beautiful occasions.</p>
 <button class="open" onclick="document.querySelector('#invite').scrollIntoView({behavior:'smooth'})">Open Invitation ↓</button>
 </div>
-<div class="scroll-cue" id="scrollCue" aria-label="Scroll down to explore the invitation"><span class="scroll-mouse"><i></i></span><span>Scroll to explore</span><b>⌄</b></div>
+<div class="scroll-cue" id="scrollCue" aria-label="Scroll down to explore the invitation">
+  <span class="scroll-cue-label">Scroll down to explore</span>
+  <span class="scroll-cue-arrow" aria-hidden="true"><i></i><i></i></span>
+  <span class="scroll-cue-sub">Discover the celebrations</span>
+</div>
 </header>
 
 <section class="paper" id="invite"><div class="inner reveal">
@@ -364,9 +373,17 @@ openEnvelope.addEventListener('click',()=>{
   },3550);
 });
 const scrollCue=document.getElementById('scrollCue');
-function updateScrollCue(){if(window.scrollY>90)scrollCue.classList.add('hidden');else scrollCue.classList.remove('hidden');}
-window.addEventListener('scroll',updateScrollCue,{passive:true});
-updateScrollCue();
+let scrollHintDismissed=false;
+function dismissScrollCue(){
+  if(scrollHintDismissed)return;
+  scrollHintDismissed=true;
+  scrollCue.classList.add('hidden');
+  window.removeEventListener('scroll',onFirstScroll);
+}
+function onFirstScroll(){if(window.scrollY>45)dismissScrollCue();}
+window.addEventListener('scroll',onFirstScroll,{passive:true});
+// Give first-time visitors a clear visual prompt, then quietly clear it if they do not scroll.
+window.setTimeout(dismissScrollCue,12000);
 const detail=document.getElementById('calendarDetail');
 const dateButtons=document.querySelectorAll('.calendar-date');
 const eventInfo={
