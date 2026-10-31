@@ -193,6 +193,29 @@ footer{text-align:center;padding:24px;background:#0b1325;color:#cbb98e;letter-sp
 @media(prefers-reduced-motion:reduce){.reveal-child{opacity:1;transform:none;transition:none}.envelope-wrap,.envelope,.envelope-flap,.envelope-front,.envelope-letter,.intro-frame{transition-duration:.01ms!important}}
 
 
+
+/* Gentle visitor guidance and accessible background-music control */
+.tap-hint{display:flex;flex-direction:column;align-items:center;gap:5px;margin:3px auto 10px;color:#e9d5a6;font:11px 'Playfair Display',serif;letter-spacing:.12em;text-transform:uppercase;animation:hintBreathe 1.8s ease-in-out infinite}
+.tap-ring{width:25px;height:25px;border:1px solid #e5c77f;border-radius:50%;display:grid;place-items:center;font-size:18px;line-height:1;box-shadow:0 0 0 0 #e5c77f77;animation:tapPulse 1.8s ease-out infinite}
+@keyframes tapPulse{70%{box-shadow:0 0 0 10px #e5c77f00}100%{box-shadow:0 0 0 0 #e5c77f00}}
+@keyframes hintBreathe{50%{opacity:.68}}
+.intro-open{position:relative;animation:openButtonGlow 2.3s ease-in-out infinite}
+@keyframes openButtonGlow{50%{box-shadow:0 7px 30px #e8c77e66,0 0 0 5px #e8c77e18}}
+.scroll-cue{position:absolute;z-index:4;bottom:22px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:#e6cf9e;font:10px 'Playfair Display',serif;letter-spacing:.2em;text-transform:uppercase;opacity:.9;transition:opacity .5s,transform .5s;pointer-events:none}
+.scroll-cue b{font:22px serif;line-height:1;animation:scrollNudge 1.5s ease-in-out infinite}
+.scroll-mouse{width:18px;height:28px;border:1px solid #dfc27f;border-radius:12px;display:block;position:relative}
+.scroll-mouse i{position:absolute;top:5px;left:7px;width:2px;height:5px;border-radius:2px;background:#f0dca7;animation:mouseWheel 1.5s ease-in-out infinite}
+@keyframes mouseWheel{0%{opacity:0;transform:translateY(0)}35%{opacity:1}100%{opacity:0;transform:translateY(9px)}}
+.scroll-cue.hidden{opacity:0;transform:translate(-50%,12px)}
+.music-control{position:fixed;right:17px;bottom:17px;z-index:25;display:flex;align-items:center;gap:9px;border:1px solid #d8b66d;background:#101b35ed;color:#f0dca7;padding:11px 15px;border-radius:28px;font:12px 'Playfair Display',serif;letter-spacing:.06em;box-shadow:0 5px 20px #0005;cursor:pointer;backdrop-filter:blur(8px);transition:transform .2s,background .2s}
+.music-control:hover{transform:translateY(-2px);background:#1b2a49}
+.music-control:focus-visible,.intro-open:focus-visible{outline:2px solid #fff1c9;outline-offset:4px}
+.music-symbol{font:15px Arial,sans-serif;min-width:12px;text-align:center}
+.music-control.is-playing .music-symbol{animation:musicPulse 1s ease-in-out infinite alternate}
+@keyframes musicPulse{to{text-shadow:0 0 10px #f0dca7;transform:scale(1.12)}}
+@media(max-width:650px){.scroll-cue{bottom:18px}.music-control{right:12px;bottom:12px;padding:10px 13px}}
+@media(prefers-reduced-motion:reduce){.tap-hint,.tap-ring,.intro-open,.scroll-cue b,.scroll-mouse i,.music-symbol{animation:none!important}}
+
 </style>
 </head>
 <body>
@@ -213,6 +236,7 @@ footer{text-align:center;padding:24px;background:#0b1325;color:#cbb98e;letter-sp
       <div class="envelope-sparkle sparkle-a">✧</div><div class="envelope-sparkle sparkle-b">✦</div><div class="envelope-sparkle sparkle-c">✧</div>
     </div>
     <p class="intro-copy">You are cordially invited to share<br>in a celebration of love and blessings</p>
+    <div class="tap-hint" aria-hidden="true"><span class="tap-ring">⌄</span><span>Tap below to open your invitation</span></div>
     <button class="intro-open" id="openEnvelope" type="button">Open invitation <span>✧</span></button>
     <div class="intro-footnote">PLEASE JOIN US IN OUR JOY</div>
   </div>
@@ -239,6 +263,7 @@ footer{text-align:center;padding:24px;background:#0b1325;color:#cbb98e;letter-sp
 <p>With the blessings of the Almighty,<br>you are warmly invited to celebrate<br>two beautiful occasions.</p>
 <button class="open" onclick="document.querySelector('#invite').scrollIntoView({behavior:'smooth'})">Open Invitation ↓</button>
 </div>
+<div class="scroll-cue" id="scrollCue" aria-label="Scroll down to explore the invitation"><span class="scroll-mouse"><i></i></span><span>Scroll to explore</span><b>⌄</b></div>
 </header>
 
 <section class="paper" id="invite"><div class="inner reveal">
@@ -279,6 +304,7 @@ footer{text-align:center;padding:24px;background:#0b1325;color:#cbb98e;letter-sp
 
 <footer>FARMAN &amp; ZUAINA · NOVEMBER 2026</footer>
 <audio id="weddingAudio" src="wedding-music.mp3" preload="auto" loop></audio>
+<button class="music-control" id="musicControl" type="button" aria-label="Pause background music" aria-pressed="true"><span class="music-symbol">Ⅱ</span><span class="music-label">Pause music</span></button>
 <script>
 const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
   if(entry.isIntersecting){
@@ -297,13 +323,37 @@ revealTargets.forEach((el,index)=>{
 });
 
 const weddingAudio=document.getElementById('weddingAudio');
+const musicControl=document.getElementById('musicControl');
+const musicLabel=musicControl.querySelector('.music-label');
+const musicSymbol=musicControl.querySelector('.music-symbol');
 const introScreen=document.getElementById('introScreen');
 const envelopeWrap=document.getElementById('envelopeWrap');
 const openEnvelope=document.getElementById('openEnvelope');
+function updateMusicControl(){
+  const playing=!weddingAudio.paused;
+  musicControl.classList.toggle('is-playing',playing);
+  musicControl.setAttribute('aria-pressed',String(playing));
+  musicControl.setAttribute('aria-label',playing?'Pause background music':'Play background music');
+  musicLabel.textContent=playing?'Pause music':'Play music';
+  musicSymbol.textContent=playing?'Ⅱ':'▶';
+}
+async function startMusic(){
+  try{await weddingAudio.play();}
+  catch(error){console.info('Autoplay was blocked by the browser; music can be started with the music button.',error);}
+  updateMusicControl();
+}
+musicControl.addEventListener('click',async()=>{
+  if(weddingAudio.paused){await startMusic();}
+  else{weddingAudio.pause();updateMusicControl();}
+});
+weddingAudio.addEventListener('play',updateMusicControl);
+weddingAudio.addEventListener('pause',updateMusicControl);
+// Attempt autoplay on arrival. Browsers that block audible autoplay leave the visible Play control ready.
+startMusic();
 openEnvelope.addEventListener('click',()=>{
   if(openEnvelope.disabled)return;
-  // The visitor's tap is the user gesture that permits audible playback in most browsers.
-  weddingAudio.play().catch(error=>console.info('Browser did not allow automatic audio playback:',error));
+  // The invitation tap is also a user gesture, so it can start audio where autoplay was blocked.
+  if(weddingAudio.paused)startMusic();
   openEnvelope.disabled=true;
   openEnvelope.textContent='Opening your invitation…';
   envelopeWrap.classList.add('opening');
@@ -313,6 +363,10 @@ openEnvelope.addEventListener('click',()=>{
     document.querySelector('.hero').classList.add('hero-arrived');
   },3550);
 });
+const scrollCue=document.getElementById('scrollCue');
+function updateScrollCue(){if(window.scrollY>90)scrollCue.classList.add('hidden');else scrollCue.classList.remove('hidden');}
+window.addEventListener('scroll',updateScrollCue,{passive:true});
+updateScrollCue();
 const detail=document.getElementById('calendarDetail');
 const dateButtons=document.querySelectorAll('.calendar-date');
 const eventInfo={
