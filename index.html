@@ -158,6 +158,40 @@ footer{text-align:center;padding:24px;background:#0b1325;color:#cbb98e;letter-sp
 @media(max-width:650px){.intro-screen:before{inset:12px}.intro-screen:after{inset:18px}.intro-frame{padding:16px 10px}.envelope-wrap{height:205px}.envelope{height:162px}.envelope-letter{height:142px}.letter-names{font-size:34px}.intro-copy{font-size:18px}}
 @media(prefers-reduced-motion:reduce){.intro-stars,.marked,.script,.dua,.music.playing .music-bars i{animation:none!important}.intro-screen,.envelope-flap,.envelope-letter,.wax-seal{transition-duration:.01ms!important}.event{transition:none}}
 
+
+/* Smooth, staged envelope opening */
+.envelope-wrap{transform:translateY(0);transition:transform 1.4s cubic-bezier(.22,.7,.18,1),filter 1.4s}
+.envelope{transition:transform 1.35s cubic-bezier(.22,.7,.18,1)}
+.envelope-flap{transition:transform 1.05s cubic-bezier(.25,.8,.2,1),opacity .35s .9s;transform-style:preserve-3d}
+.envelope-front{transform-origin:bottom center;transition:transform 1.15s cubic-bezier(.2,.7,.15,1),opacity .7s .9s}
+.envelope-letter{transition:transform 1.35s cubic-bezier(.16,1,.3,1),top 1.35s cubic-bezier(.16,1,.3,1),box-shadow 1s;will-change:transform,top}
+.envelope-wrap.opening .envelope-flap{transform:rotateX(180deg);opacity:.15}
+.envelope-wrap.opening .envelope-front{transform:translateY(42px) scaleY(.72);opacity:0}
+.envelope-wrap.opening .envelope-letter{top:-78px;transform:translateY(-22px) scale(1.07);box-shadow:0 18px 35px #0005;transition-delay:.28s}
+.envelope-wrap.opening .envelope{transform:translateY(12px) scale(.98)}
+.envelope-wrap.opening{transform:translateY(-7px);filter:drop-shadow(0 28px 30px #0005)}
+.intro-screen.leaving{opacity:0;visibility:hidden;transition:opacity 1.45s cubic-bezier(.4,0,.2,1),visibility 1.45s}
+.intro-screen.leaving .intro-frame{transform:translateY(-12px) scale(.985);opacity:0;transition:transform .95s ease,opacity .85s ease}
+.intro-screen.leaving .intro-stars{opacity:0;transition:opacity 1s}
+.reveal-child{opacity:0;transform:translateY(26px);transition:opacity .85s ease,transform .85s cubic-bezier(.2,.7,.2,1)}
+.reveal-child.in-view{opacity:1;transform:none}
+.reveal-child[data-reveal-delay="1"]{transition-delay:.12s}
+.reveal-child[data-reveal-delay="2"]{transition-delay:.24s}
+.reveal-child[data-reveal-delay="3"]{transition-delay:.36s}
+.event.reveal-child{transform:translateY(30px) scale(.985)}
+.event.reveal-child.in-view{transform:none}
+.calendar-detail{min-height:92px;margin:18px auto 0;padding:14px 16px;max-width:440px;border-top:1px solid #d8b66d88;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;transition:opacity .25s,transform .25s}
+.calendar-detail.updating{opacity:0;transform:translateY(6px)}
+.detail-kicker{font:10px 'Playfair Display',serif;letter-spacing:.18em;text-transform:uppercase;color:#9b783e}
+.detail-copy{font-size:18px;line-height:1.35;color:#493823}
+.calendar-date{font:inherit;cursor:pointer;border:0;min-width:36px;min-height:36px;padding:5px 7px;display:inline-grid;place-items:center;transition:transform .25s,box-shadow .25s,background .25s}
+.calendar-date:hover,.calendar-date:focus-visible{transform:scale(1.13);box-shadow:0 0 0 5px #d8b66d33;outline:none}
+.calendar-date[aria-pressed="true"]{background:#d1aa5b;color:#251b12;box-shadow:0 0 0 4px #d8b66d55,0 0 20px #d8b66d77}
+.calendar-view-event{margin-top:5px;border:0;border-bottom:1px solid #b48c4d;background:transparent;color:#805c2d;font:15px 'Playfair Display',serif;padding:5px 2px;cursor:pointer}
+.calendar-view-event:hover{color:#9b273a}
+@media(max-width:650px){.calendar-detail{min-height:100px}.detail-copy{font-size:17px}}
+@media(prefers-reduced-motion:reduce){.reveal-child{opacity:1;transform:none;transition:none}.envelope-wrap,.envelope,.envelope-flap,.envelope-front,.envelope-letter,.intro-frame{transition-duration:.01ms!important}}
+
 </style>
 </head>
 <body>
@@ -221,9 +255,9 @@ footer{text-align:center;padding:24px;background:#0b1325;color:#cbb98e;letter-sp
 <div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div>
 <div>9</div><div>10</div><div>11</div><div>12</div><div>13</div><div>14</div><div>15</div>
 <div>16</div><div>17</div><div>18</div><div>19</div><div>20</div><div>21</div><div>22</div>
-<div>23</div><div>24</div><div>25</div><div>26</div><div>27</div><div class="marked">28</div><div>29</div>
-<div class="marked">30</div>
-</div></div></div></section>
+<div>23</div><div>24</div><div>25</div><div>26</div><div>27</div><button class="marked calendar-date" type="button" data-event="nikah" aria-label="28 November 2026, Nikah-e-Masnoon">28</button><div>29</div>
+<button class="marked calendar-date" type="button" data-event="walima" aria-label="30 November 2026, Mehfil-e-Walima">30</button>
+</div><div class="calendar-detail" id="calendarDetail" aria-live="polite"><span class="detail-kicker">Choose a highlighted date</span><span class="detail-copy">Tap 28 for Nikah or 30 for Walima to see the event details.</span></div></div></div></section>
 
 <section class="paper"><div class="inner reveal">
 <div class="kicker">The celebrations</div><h2 class="heading">Join us for these blessed occasions</h2>
@@ -246,8 +280,21 @@ footer{text-align:center;padding:24px;background:#0b1325;color:#cbb98e;letter-sp
 <audio id="weddingAudio" src="wedding-music.mp3" preload="none" loop></audio>
 <button class="music" id="music" type="button" aria-label="Play music"><span class="music-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span id="musicLabel">Play music</span></button>
 <script>
-const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.12});
+const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
+  if(entry.isIntersecting){
+    entry.target.classList.add(entry.target.classList.contains('reveal-child')?'in-view':'visible');
+    observer.unobserve(entry.target);
+  }
+}),{threshold:.12,rootMargin:'0px 0px -5% 0px'});
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+const revealTargets=document.querySelectorAll('section .inner > *, .events .event, .calendar');
+revealTargets.forEach((el,index)=>{
+  if(el.classList.contains('reveal'))return;
+  el.classList.add('reveal-child');
+  const delay=index%4;
+  if(delay)el.dataset.revealDelay=String(delay);
+  observer.observe(el);
+});
 
 const weddingAudio=document.getElementById('weddingAudio');
 const musicButton=document.getElementById('music');
@@ -276,15 +323,35 @@ const openEnvelope=document.getElementById('openEnvelope');
 openEnvelope.addEventListener('click',()=>{
   if(openEnvelope.disabled)return;
   openEnvelope.disabled=true;
-  openEnvelope.textContent='Your invitation awaits';
+  openEnvelope.textContent='Opening your invitation…';
   envelopeWrap.classList.add('opening');
-  document.body.classList.add('invitation-opening');
+  window.setTimeout(()=>introScreen.classList.add('leaving'),2050);
   window.setTimeout(()=>{
-    introScreen.classList.add('dismissed');
-    document.body.classList.remove('invitation-opening');
-    document.querySelector('.hero').scrollIntoView({behavior:'smooth',block:'start'});
-  },1750);
-  window.setTimeout(()=>introScreen.remove(),3000);
+    introScreen.remove();
+    document.querySelector('.hero').classList.add('hero-arrived');
+  },3550);
+});
+const detail=document.getElementById('calendarDetail');
+const dateButtons=document.querySelectorAll('.calendar-date');
+const eventInfo={
+  nikah:{title:'Saturday · 28 November 2026',description:'Nikah-e-Masnoon · Balrampur Garden, Ashok Marg, Hazratganj, Lucknow',target:'.event:first-child'},
+  walima:{title:'Monday · 30 November 2026',description:'Mehfil-e-Walima · Moti Mahal Lawn (RICHI RICH), Rana Pratap Marg, Hazratganj, Lucknow',target:'.event:last-child'}
+};
+dateButtons.forEach(button=>{
+  button.setAttribute('aria-pressed','false');
+  button.addEventListener('click',()=>{
+    const info=eventInfo[button.dataset.event];
+    if(!info)return;
+    dateButtons.forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
+    detail.classList.add('updating');
+    window.setTimeout(()=>{
+      detail.innerHTML='<span class="detail-kicker">'+info.title+'</span><span class="detail-copy">'+info.description+'</span><button class="calendar-view-event" type="button">View event details ↓</button>';
+      detail.classList.remove('updating');
+      detail.querySelector('.calendar-view-event').addEventListener('click',()=>{
+        document.querySelector(info.target).scrollIntoView({behavior:'smooth',block:'center'});
+      });
+    },180);
+  });
 });
 const scrollProgress=document.getElementById('scrollProgress');
 function updateProgress(){
